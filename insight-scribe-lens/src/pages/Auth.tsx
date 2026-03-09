@@ -190,16 +190,6 @@ export default function Auth() {
               </button>
             </p>
           )}
-
-          <p className="text-xs text-center text-muted-foreground mt-4">
-            Admin?{" "}
-            <button
-              onClick={() => navigate("/admin/login")}
-              className="text-primary hover:underline font-medium"
-            >
-              Sign in here
-            </button>
-          </p>
         </motion.div>
       </div>
     </div>
