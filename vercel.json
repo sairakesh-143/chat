@@ -1,0 +1,6 @@
+{
+  "buildCommand": "cd insight-scribe-lens && npm install && npm run build",
+  "outputDirectory": "insight-scribe-lens/dist",
+  "installCommand": "cd insight-scribe-lens && npm install",
+  "framework": "vite"
+}
