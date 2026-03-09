@@ -43,7 +43,7 @@ function AdminAuthRoute() {
 function AdminRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
   if (loading) return <LoadingSpinner />;
-  if (!user) return <Navigate to="/login" replace />;
+  if (!user) return <Navigate to="/admin/login" replace />;
   if (user.email !== ADMIN_EMAIL) return <Navigate to="/chat" replace />;
   return <>{children}</>;
 }
