@@ -2,7 +2,6 @@ import { useRequestLogs } from "@/hooks/useRequestLogs";
 import { computeLatencyMetrics, computeLatencyTimeSeries, computeRequestsPerDay } from "@/lib/dataStore";
 import StatCard from "@/components/StatCard";
 import EmptyState from "@/components/EmptyState";
-import AddRequestDialog from "@/components/AddRequestDialog";
 import { Timer, TrendingUp, Gauge, Clock, Activity } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { motion } from "framer-motion";
@@ -40,7 +39,6 @@ export default function Metrics() {
             <h1 className="text-2xl font-bold text-foreground">Latency Metrics</h1>
             <p className="text-sm text-muted-foreground mt-1">Performance percentiles and trends</p>
           </div>
-          <AddRequestDialog />
         </div>
         <EmptyState icon={Activity} title="No metrics yet" description="Add request logs to see latency metrics, token distribution, and model usage breakdowns." />
       </div>
@@ -64,7 +62,6 @@ export default function Metrics() {
           <h1 className="text-2xl font-bold text-foreground">Latency Metrics</h1>
           <p className="text-sm text-muted-foreground mt-1">Performance percentiles and trends</p>
         </div>
-        <AddRequestDialog />
       </div>
 
       <motion.div

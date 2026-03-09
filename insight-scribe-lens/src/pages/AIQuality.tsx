@@ -1,9 +1,6 @@
 import { useEvaluations } from "@/hooks/useEvaluations";
 import { cn } from "@/lib/utils";
-import { Brain, Download } from "lucide-react";
-import AddEvaluationDialog from "@/components/AddEvaluationDialog";
-import { Button } from "@/components/ui/button";
-import { exportEvaluations } from "@/lib/csvExport";
+import { Brain } from "lucide-react";
 import EmptyState from "@/components/EmptyState";
 import { Skeleton } from "@/components/ui/skeleton";
 import { motion } from "framer-motion";
@@ -43,7 +40,6 @@ export default function AIQuality() {
             <h1 className="text-2xl font-bold text-foreground">AI Quality & Evaluation</h1>
             <p className="text-sm text-muted-foreground mt-1">Automated LLM evaluation scores</p>
           </div>
-          <AddEvaluationDialog />
         </div>
         <EmptyState icon={Brain} title="No evaluations yet" description="Add request logs first, then create evaluations to track relevance, hallucination, and context usage scores." />
       </div>
@@ -73,12 +69,6 @@ export default function AIQuality() {
         <div>
           <h1 className="text-2xl font-bold text-foreground">AI Quality & Evaluation</h1>
           <p className="text-sm text-muted-foreground mt-1">Scores across {evaluations.length} evaluations</p>
-        </div>
-        <div className="flex gap-2">
-          <Button variant="outline" size="sm" onClick={() => exportEvaluations(evaluations)}>
-            <Download className="h-4 w-4 mr-1.5" /> Export CSV
-          </Button>
-          <AddEvaluationDialog />
         </div>
       </div>
 

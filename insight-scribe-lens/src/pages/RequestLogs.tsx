@@ -1,14 +1,12 @@
 import { useState } from "react";
 import { useRequestLogs, useDeleteRequestLog } from "@/hooks/useRequestLogs";
 import { cn } from "@/lib/utils";
-import { Search, FileText, Trash2, Loader2, Download } from "lucide-react";
-import AddRequestDialog from "@/components/AddRequestDialog";
+import { Search, FileText, Trash2, Loader2 } from "lucide-react";
 import EmptyState from "@/components/EmptyState";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
-import { exportRequestLogs } from "@/lib/csvExport";
 
 export default function RequestLogs() {
   const [search, setSearch] = useState("");
@@ -48,14 +46,6 @@ export default function RequestLogs() {
         <div>
           <h1 className="text-2xl font-bold text-foreground">Request Logs</h1>
           <p className="text-sm text-muted-foreground mt-1">{allLogs.length} total requests traced</p>
-        </div>
-        <div className="flex gap-2">
-          {allLogs.length > 0 && (
-            <Button variant="outline" size="sm" onClick={() => exportRequestLogs(allLogs)}>
-              <Download className="h-4 w-4 mr-1.5" /> Export CSV
-            </Button>
-          )}
-          <AddRequestDialog />
         </div>
       </div>
 

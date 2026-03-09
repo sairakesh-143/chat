@@ -1,15 +1,11 @@
-import { Activity, DollarSign, Zap, AlertTriangle, Hash, Brain, Download } from "lucide-react";
+import { Activity, DollarSign, Zap, AlertTriangle, Hash, Brain } from "lucide-react";
 import StatCard from "@/components/StatCard";
-import AddRequestDialog from "@/components/AddRequestDialog";
-import AddEvaluationDialog from "@/components/AddEvaluationDialog";
 import EmptyState from "@/components/EmptyState";
 import { useRequestLogs } from "@/hooks/useRequestLogs";
 import { useEvaluations } from "@/hooks/useEvaluations";
 import {
   computeOverviewStats, computeLatencyTimeSeries, computeRequestsPerDay, computeCostPerDay, computeLatencyMetrics,
 } from "@/lib/dataStore";
-import { exportRequestLogs, exportEvaluations } from "@/lib/csvExport";
-import { Button } from "@/components/ui/button";
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar,
 } from "recharts";
@@ -61,22 +57,6 @@ export default function Overview() {
           <p className="text-sm text-muted-foreground mt-1">
             {hasData ? "Real-time RAG pipeline monitoring" : "Add your first request to get started"}
           </p>
-        </div>
-        <div className="flex gap-2 flex-wrap">
-          {hasData && (
-            <>
-              <Button variant="outline" size="sm" onClick={() => exportRequestLogs(logs)}>
-                <Download className="h-4 w-4 mr-1.5" /> Logs CSV
-              </Button>
-              {evals.length > 0 && (
-                <Button variant="outline" size="sm" onClick={() => exportEvaluations(evals)}>
-                  <Download className="h-4 w-4 mr-1.5" /> Evals CSV
-                </Button>
-              )}
-            </>
-          )}
-          <AddEvaluationDialog />
-          <AddRequestDialog />
         </div>
       </div>
 
