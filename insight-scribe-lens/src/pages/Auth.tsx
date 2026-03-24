@@ -62,72 +62,48 @@ export default function Auth() {
   };
 
   return (
-    <div className="flex min-h-screen bg-background">
-      {/* Left panel — branding */}
-      <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden items-center justify-center bg-sidebar">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.15),transparent_70%)]" />
+    <div className="relative min-h-screen overflow-hidden bg-[#030712]">
+      <div className="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-emerald-500/20 blur-3xl" />
+      <div className="pointer-events-none absolute -right-24 bottom-10 h-80 w-80 rounded-full bg-cyan-400/20 blur-3xl" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_22%,rgba(16,185,129,0.12),transparent_38%),radial-gradient(circle_at_85%_70%,rgba(34,211,238,0.12),transparent_36%)]" />
+
+      <div className="relative z-10 mx-auto grid min-h-screen w-full max-w-7xl grid-cols-1 items-center gap-8 px-6 py-8 lg:grid-cols-[1.05fr_0.95fr] lg:px-10 lg:py-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="relative z-10 text-center px-12"
+          transition={{ duration: 0.55 }}
+          className="order-2 rounded-3xl border border-white/10 bg-slate-950/80 p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.02),0_30px_120px_-35px_rgba(16,185,129,0.6)] backdrop-blur-xl sm:p-8 lg:order-1 lg:p-10"
         >
-          <div className="h-16 w-16 rounded-2xl bg-primary flex items-center justify-center mx-auto mb-6">
-            <Radio className="h-8 w-8 text-primary-foreground" />
-          </div>
-          <h1 className="text-4xl font-bold text-foreground mb-3">RAG Monitor</h1>
-          <p className="text-lg text-muted-foreground max-w-md">
-            Full observability for your RAG pipelines. Track latency, cost, token usage, and AI quality scores in real time.
-          </p>
-          <div className="mt-8 grid grid-cols-3 gap-4">
-            {[
-              { label: "Latency", value: "< 200ms" },
-              { label: "Uptime", value: "99.9%" },
-              { label: "Evaluations", value: "Real-time" },
-            ].map((stat) => (
-              <div key={stat.label} className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-lg p-3">
-                <p className="text-xs text-muted-foreground">{stat.label}</p>
-                <p className="text-lg font-bold font-mono text-primary">{stat.value}</p>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-      </div>
-
-      {/* Right panel — form */}
-      <div className="flex-1 flex items-center justify-center p-8">
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="w-full max-w-sm"
-        >
-          <div className="lg:hidden flex items-center gap-2.5 mb-8">
-            <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-              <Radio className="h-4 w-4 text-primary-foreground" />
+          <div className="mb-7 flex items-center gap-3">
+            <div className="grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br from-emerald-400 to-teal-500 text-slate-950">
+              <Radio className="h-5 w-5" />
             </div>
-            <h1 className="text-lg font-semibold text-foreground">RAG Monitor</h1>
+            <div>
+              <p className="text-xs uppercase tracking-[0.22em] text-emerald-300/80">Insight Scribe</p>
+              <h1 className="text-lg font-semibold text-white">RAG Monitor</h1>
+            </div>
           </div>
 
-          <h2 className="text-2xl font-bold text-foreground mb-1">
-            {mode === "forgot" ? "Reset password" : mode === "signup" ? "Create account" : "Welcome back"}
+          <h2 className="text-3xl font-bold leading-tight text-white sm:text-4xl">
+            {mode === "forgot" ? "Reset your password" : mode === "signup" ? "Create your workspace access" : "Welcome back"}
           </h2>
-          <p className="text-sm text-muted-foreground mb-6">
-            {mode === "forgot" ? "We'll send you a reset link" : mode === "signup" ? "Sign up to get started" : "Sign in to continue"}
+          <p className="mt-2 text-sm text-slate-300 sm:text-base">
+            {mode === "forgot" ? "We will email a secure reset link." : mode === "signup" ? "Get started with real-time AI quality visibility." : "Sign in to continue monitoring model quality."}
           </p>
 
           {mode === "forgot" && (
             <button
               onClick={() => setMode("login")}
-              className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-4"
+              className="mt-5 flex items-center gap-1.5 text-sm text-slate-300 transition-colors hover:text-white"
             >
-              <ArrowLeft className="h-3.5 w-3.5" /> Back to sign in
+              <ArrowLeft className="h-4 w-4" />
+              Back to sign in
             </button>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <Label htmlFor="email">Email</Label>
+          <form onSubmit={handleSubmit} className="mt-7 space-y-5">
+            <div className="space-y-2">
+              <Label htmlFor="email" className="text-slate-200">Email</Label>
               <Input
                 id="email"
                 type="email"
@@ -135,26 +111,28 @@ export default function Auth() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
                 required
+                className="h-12 border-white/10 bg-slate-900/70 text-white placeholder:text-slate-500 focus-visible:ring-emerald-400"
               />
             </div>
+
             {(mode === "login" || mode === "signup") && (
-              <div>
-                <Label htmlFor="password">Password</Label>
+              <div className="space-y-2">
+                <Label htmlFor="password" className="text-slate-200">Password</Label>
                 <div className="relative">
                   <Input
                     id="password"
                     type={showPassword ? "text" : "password"}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="••••••••"
+                    placeholder="At least 6 characters"
                     required
                     minLength={6}
-                    className="pr-10"
+                    className="h-12 border-white/10 bg-slate-900/70 pr-11 text-white placeholder:text-slate-500 focus-visible:ring-emerald-400"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 transition-colors hover:text-white"
                     tabIndex={-1}
                   >
                     {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -162,34 +140,75 @@ export default function Auth() {
                 </div>
               </div>
             )}
+
             {mode === "login" && (
               <div className="text-right">
                 <button
                   type="button"
                   onClick={() => setMode("forgot")}
-                  className="text-xs text-muted-foreground hover:text-primary"
+                  className="text-sm text-slate-400 transition-colors hover:text-emerald-300"
                 >
                   Forgot password?
                 </button>
               </div>
             )}
-            <Button type="submit" className="w-full" disabled={loading}>
-              {loading && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
+
+            <Button
+              type="submit"
+              className="h-12 w-full bg-emerald-500 text-slate-950 transition-all hover:bg-emerald-400"
+              disabled={loading}
+            >
+              {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               {mode === "login" ? "Sign In" : mode === "signup" ? "Create Account" : "Send Reset Link"}
             </Button>
           </form>
 
           {mode !== "forgot" && (
-            <p className="text-sm text-center text-muted-foreground mt-6">
-              {mode === "login" ? "Don't have an account? " : "Already have an account? "}
+            <p className="mt-6 text-center text-sm text-slate-300">
+              {mode === "login" ? "Need an account? " : "Already have an account? "}
               <button
                 onClick={() => setMode(mode === "login" ? "signup" : "login")}
-                className="text-primary hover:underline font-medium"
+                className="font-semibold text-emerald-300 transition-colors hover:text-emerald-200"
               >
                 {mode === "login" ? "Sign Up" : "Sign In"}
               </button>
             </p>
           )}
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: 24 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="order-1 rounded-3xl border border-white/10 bg-gradient-to-br from-slate-950/80 via-slate-900/75 to-emerald-950/55 p-6 backdrop-blur-xl sm:p-8 lg:order-2 lg:h-full lg:p-10"
+        >
+          <p className="text-xs uppercase tracking-[0.22em] text-cyan-200/80">Live AI Operations</p>
+          <h3 className="mt-3 max-w-md text-3xl font-bold leading-tight text-white sm:text-4xl">
+            Observe quality, speed, and spend from one command center.
+          </h3>
+          <p className="mt-4 max-w-lg text-slate-300">
+            Built for teams running production RAG systems. Detect drift early, compare model performance, and ship better responses with confidence.
+          </p>
+
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-1">
+            {[
+              { label: "Latency", value: "182ms", note: "P95 response" },
+              { label: "Quality", value: "+14.7%", note: "Since last week" },
+              { label: "Monthly Cost", value: "$4,240", note: "Within budget" },
+            ].map((metric, index) => (
+              <motion.div
+                key={metric.label}
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.28 + index * 0.1, duration: 0.45 }}
+                className="rounded-2xl border border-white/10 bg-slate-900/60 p-4"
+              >
+                <p className="text-xs uppercase tracking-[0.12em] text-slate-400">{metric.label}</p>
+                <p className="mt-2 font-mono text-2xl font-semibold text-emerald-300">{metric.value}</p>
+                <p className="mt-1 text-xs text-slate-400">{metric.note}</p>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
       </div>
     </div>
